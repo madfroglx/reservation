@@ -1,9 +1,10 @@
 package com.g01.reservation.controller;
 
-import java.util.List;
 import java.util.Map;
 import com.google.common.collect.Maps;
 import javax.servlet.http.HttpServletRequest;
+
+import com.g01.GuaranteeEnum;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.roof.roof.dataaccess.api.Page;
@@ -27,6 +28,10 @@ public class ReservationController {
 	@RequestMapping(value = "reservation/base", method = {RequestMethod.GET})
 	public @ResponseBody Result<Map<String,Object>> base(HttpServletRequest request) {
 		Map<String,Object> map = Maps.newHashMap();
+		//担保方式
+		GuaranteeEnum[] guarantees = GuaranteeEnum.values();
+		map.put("guarantees",guarantees);
+
 		return new Result(Result.SUCCESS, map);
 	}
 
