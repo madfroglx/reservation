@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.g01.reservation.dao">
+
+	<sql id="columns">
+		id, name, guarantee, amount, contacts, start_time, end_time, manager, manager_contacts
+	</sql>
+
+	<sql id="columns_as">
+		id as id , name as name , guarantee as guarantee , amount as amount , contacts as contacts , start_time as startTime , end_time as endTime , manager as manager , manager_contacts as managerContacts 
+	</sql>
+
+
+	<sql id="vals">
+		#{id}, #{name}, #{guarantee}, #{amount}, #{contacts}, #{startTime}, #{endTime}, #{manager}, #{managerContacts}
+	</sql>
+	<sql id="conds">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="guarantee != null">
+			and guarantee = #{guarantee}
+		</if>
+		<if test="amount != null">
+			and amount = #{amount}
+		</if>
+		<if test="contacts != null and contacts != ''">
+			and contacts = #{contacts}
+		</if>
+		<if test="startTime != null">
+			and start_time = #{startTime}
+		</if>
+		<if test="endTime != null">
+			and end_time = #{endTime}
+		</if>
+		<if test="manager != null and manager != ''">
+			and manager = #{manager}
+		</if>
+		<if test="managerContacts != null and managerContacts != ''">
+			and manager_contacts = #{managerContacts}
+		</if>
+	</sql>
+
+	<insert id="saveReservation" parameterType="com.g01.reservation.entity.Reservation" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into t_reservation (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteReservation">
+		delete from t_reservation
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleReservation">
+		delete from t_reservation
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateReservation">
+		update t_reservation
+		<set>
+			id=#{id}, 
+			name=#{name}, 
+			guarantee=#{guarantee}, 
+			amount=#{amount}, 
+			contacts=#{contacts}, 
+			start_time=#{startTime}, 
+			end_time=#{endTime}, 
+			manager=#{manager}, 
+			manager_contacts=#{managerContacts}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullReservation">
+		update t_reservation
+		<set>
+		<if test="id != null">
+			id=#{id}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="guarantee != null">
+			guarantee=#{guarantee}, 
+		</if>
+		<if test="amount != null">
+			amount=#{amount}, 
+		</if>
+		<if test="contacts != null and contacts != ''">
+			contacts=#{contacts}, 
+		</if>
+		<if test="startTime != null">
+			start_time=#{startTime}, 
+		</if>
+		<if test="endTime != null">
+			end_time=#{endTime}, 
+		</if>
+		<if test="manager != null and manager != ''">
+			manager=#{manager}, 
+		</if>
+		<if test="managerContacts != null and managerContacts != ''">
+			manager_contacts=#{managerContacts}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleReservation">
+		update t_reservation
+		<set>
+			<if test="id != null">
+			id=#{id}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="guarantee != null">
+			guarantee=#{guarantee}, 
+			</if>
+			<if test="amount != null">
+			amount=#{amount}, 
+			</if>
+			<if test="contacts != null and contacts != ''">
+			contacts=#{contacts}, 
+			</if>
+			<if test="startTime != null">
+			start_time=#{startTime}, 
+			</if>
+			<if test="endTime != null">
+			end_time=#{endTime}, 
+			</if>
+			<if test="manager != null and manager != ''">
+			manager=#{manager}, 
+			</if>
+			<if test="managerContacts != null and managerContacts != ''">
+			manager_contacts=#{managerContacts}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadReservation" resultType="com.g01.reservation.entity.ReservationVo">
+		select 
+		<include refid="columns_as"/>
+		from t_reservation
+		where id=#{id} 
+	</select>
+	
+	<select id="selectReservation" resultType="com.g01.reservation.entity.ReservationVo">
+		select 
+		<include refid="columns_as"/>
+		from t_reservation
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>
