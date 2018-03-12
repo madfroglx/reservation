@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="f_test:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="roof-demo.war">
+    <root id="archive" name="roof-reservation.war">
       <element id="artifact" artifact-name="f_test:war exploded" />
     </root>
   </artifact>
