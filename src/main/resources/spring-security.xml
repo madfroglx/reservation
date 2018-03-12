@@ -17,7 +17,7 @@
     <http pattern="/userAction/**" security="none"/>
 
     <http pattern="/token*" security="none"/>
-    <http pattern="/swagger/**" security="none"/>
+    <!--<http pattern="/swagger/**" security="none"/>-->
     <http pattern="/v2/api-docs*" security="none"/>
 
     <http pattern="/fpa/pic/**" security="none"/>
