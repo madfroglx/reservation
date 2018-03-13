@@ -3,7 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.g01.reservation.dao">
     <sql id="columnsAs">
-		t1.id as id, t1.name as name, t1.guarantee as guarantee, t1.amount as amount, t1.contacts as contacts, t1.start_time as startTime, t1.end_time as endTime, t1.manager as manager, t1.manager_contacts as managerContacts
+		t1.id as id, t1.name as name, t1.guarantee as guarantee, t1.amount as amount,
+		t1.contacts as contacts, t1.start_time as startTime, t1.end_time as endTime,
+		t1.manager as manager, t1.manager_contacts as managerContacts ,t1.subbranch as subbranch
 	</sql>
 
     <select id="selectReservationPage" resultType="com.g01.reservation.entity.ReservationVo">

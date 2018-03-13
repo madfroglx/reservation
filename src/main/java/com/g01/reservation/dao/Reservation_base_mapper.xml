@@ -4,16 +4,19 @@
 <mapper namespace="com.g01.reservation.dao">
 
     <sql id="columns">
-		id, name, guarantee, amount, contacts, start_time, end_time, manager, manager_contacts
+		id, name, guarantee, amount, contacts, start_time, end_time, manager, manager_contacts,subbranch
 	</sql>
 
     <sql id="columns_as">
-		id as id , name as name , guarantee as guarantee , amount as amount , contacts as contacts , start_time as startTime , end_time as endTime , manager as manager , manager_contacts as managerContacts 
+		id as id , name as name , guarantee as guarantee , amount as amount , contacts as contacts ,
+		start_time as startTime , end_time as endTime , manager as manager ,
+		manager_contacts as managerContacts , subbranch as subbranch
 	</sql>
 
 
     <sql id="vals">
-		#{id}, #{name}, #{guarantee}, #{amount}, #{contacts}, #{startTime}, #{endTime}, #{manager}, #{managerContacts}
+		#{id}, #{name}, #{guarantee}, #{amount}, #{contacts}, #{startTime},
+		#{endTime}, #{manager}, #{managerContacts},#{subbranch}
 	</sql>
     <sql id="conds">
         <if test="id != null">
@@ -39,6 +42,9 @@
         </if>
         <if test="manager != null and manager != ''">
             and manager like CONCAT('%', #{manager}, '%')
+        </if>
+        <if test="subbranch != null and subbranch != ''">
+            and subbranch like CONCAT('%', #{subbranch}, '%')
         </if>
         <if test="managerContacts != null and managerContacts != ''">
             and manager_contacts = #{managerContacts}
@@ -76,6 +82,7 @@
             start_time=#{startTime},
             end_time=#{endTime},
             manager=#{manager},
+            subbranch=#{subbranch},
             manager_contacts=#{managerContacts}
         </set>
         where id=#{id}
@@ -107,6 +114,9 @@
             </if>
             <if test="manager != null and manager != ''">
                 manager=#{manager},
+            </if>
+            <if test="subbranch != null and subbranch != ''">
+                subbranch=#{subbranch},
             </if>
             <if test="managerContacts != null and managerContacts != ''">
                 manager_contacts=#{managerContacts}
@@ -141,6 +151,9 @@
             </if>
             <if test="manager != null and manager != ''">
                 manager=#{manager},
+            </if>
+            <if test="subbranch != null and subbranch != ''">
+                subbranch=#{subbranch},
             </if>
             <if test="managerContacts != null and managerContacts != ''">
                 manager_contacts=#{managerContacts}

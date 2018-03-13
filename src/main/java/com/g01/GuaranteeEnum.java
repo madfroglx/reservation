@@ -13,11 +13,9 @@ import java.lang.reflect.Type;
  */
 public enum GuaranteeEnum implements JSONSerializable {
 
-    guarantee(0, "保证", "guarantee"),
-    pledge(1, "抵押", "pledge"),
-    qualityPledge(2, "质押", "qualityPledge"),
-    lien(3, "留置", "lien"),
-    earnest(4, "定金", "earnest");
+    pledge(0, "抵押", "pledge"),
+    guarantee(1, "担保", "guarantee"),
+    credit(2, "信用", "credit");
 
 
     private Integer code;
