@@ -27,6 +27,9 @@
             <properties>
                 <package.environment>online</package.environment>
             </properties>
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
         </profile>
     </profiles>
     <dependencies>
@@ -36,13 +39,23 @@
             <groupId>org.roof</groupId>
             <artifactId>roof-web-base-service-impl</artifactId>
             <version>${roof-version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.roof</groupId>
             <artifactId>roof-oauth2</artifactId>
             <version>${roof-version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.8.7</version>
+        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -54,6 +67,12 @@
             <groupId>org.roof</groupId>
             <artifactId>roof-web-base-webapp</artifactId>
             <version>${roof-version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
             <type>war</type>
         </dependency>
 
@@ -75,11 +94,6 @@
             <version>1.3.1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.6.6</version>
-        </dependency>
 
         <dependency>
             <groupId>io.springfox</groupId>
@@ -120,17 +134,15 @@
             <version>1.8</version>
             <systemPath>/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/rt.jar</systemPath>
         </dependency>-->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
     <build>
-        <finalName>roof-reservation</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
+        <finalName>reservation-web</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

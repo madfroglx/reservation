@@ -15,6 +15,7 @@
 
 
     <http pattern="/userAction/**" security="none"/>
+    <http pattern="/test/**" security="none"/>
 
     <http pattern="/token*" security="none"/>
     <!--<http pattern="/swagger/**" security="none"/>-->
@@ -36,7 +37,7 @@
     <http pattern="/**/*.jsp" request-matcher="ant" security="none"/>
     <http pattern="/**/*.css" request-matcher="ant" security="none"/>
     <http pattern="/**/*.js" request-matcher="ant" security="none"/>
-    <http pattern=".+[.](ico$|png$|jpg$|gif$|PNG$|JPG$|GIF$|xml$|xls$)" request-matcher="regex" security="none"/>
+    <http pattern=".+[.](ico$|png$|jpg$|gif$|PNG$|JPG$|GIF$|xml$|xls$|eot$|svg$|ttf$|woff$|woff2$|)" request-matcher="regex" security="none"/>
 
 
     <!-- 权限名称必须以 ROLE_ 开头 -->

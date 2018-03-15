@@ -5,7 +5,7 @@
 		<New class="org.eclipse.jetty.util.resource.ResourceCollection">
 			<Arg>
 				<Array type="java.lang.String">
-					<Item>/Users/liuxin/Documents/workspace/f_test/src/main/webapp</Item>
+					<Item>/Users/apple/roof/workspace/workspace-git-fpa/reservation/src/main/webapp</Item>
 				</Array>
 			</Arg>
 		</New>

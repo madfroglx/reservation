@@ -11,6 +11,8 @@
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
     <mvc:annotation-driven/>
 
+    <mvc:default-servlet-handler/>
+
     <mvc:interceptors>
         <bean class="org.roof.spring.web.handler.BasePathHandlerInterceptor"/>
         <!-- 国际化操作拦截器 如果采用基于（请求/Session/Cookie）则必需配置 -->
@@ -23,29 +25,34 @@
     <bean id="localeResolver"
           class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/WEB-INF/views/"
+          p:suffix=".jsp" />
+
+
     <bean
             class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
-        <property name="order" value="0" />
+        <property name="order" value="0"/>
         <property name="webBindingInitializer">
             <bean
                     class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
                 <property name="conversionService">
                     <bean
-                            class="org.springframework.format.support.FormattingConversionServiceFactoryBean" />
+                            class="org.springframework.format.support.FormattingConversionServiceFactoryBean"/>
                 </property>
             </bean>
         </property>
         <property name="messageConverters">
             <list>
                 <bean
-                        class="org.springframework.http.converter.ByteArrayHttpMessageConverter" />
+                        class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
                 <bean
                         class="org.springframework.http.converter.StringHttpMessageConverter">
-                    <property name="writeAcceptCharset" value="false" />
+                    <property name="writeAcceptCharset" value="false"/>
                 </bean>
-                <bean class="org.springframework.http.converter.FormHttpMessageConverter" />
+                <bean class="org.springframework.http.converter.FormHttpMessageConverter"/>
                 <bean
-                        class="org.springframework.http.converter.xml.SourceHttpMessageConverter" />
+                        class="org.springframework.http.converter.xml.SourceHttpMessageConverter"/>
                 <bean
                         class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4">
                     <property name="supportedMediaTypes">

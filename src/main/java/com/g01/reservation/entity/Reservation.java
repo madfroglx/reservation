@@ -27,12 +27,12 @@ public class Reservation implements Serializable {
     protected Integer amount;// 金额
     @ApiModelProperty(value = "联系方式")
     protected String contacts;// 联系方式
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "用款开始时间")
     protected Date startTime;// 用款开始时间
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(format = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @ApiModelProperty(value = "用款结束时间")
     protected Date endTime;// 用款结束时间
     @ApiModelProperty(value = "客户经理")
