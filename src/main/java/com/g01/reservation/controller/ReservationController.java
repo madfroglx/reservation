@@ -32,7 +32,8 @@ public class ReservationController {
 
     @RequestMapping(value = "reservationsave", method = {RequestMethod.POST})
     public @ResponseBody
-    Result create1(Reservation reservation) {
+    Result create1(Reservation reservation, HttpServletResponse response) {
+        response.setHeader("Access-Control-Allow-Origin", "*");
         if (reservation != null) {
             reservationService.save(reservation);
             return new Result("保存成功!");
