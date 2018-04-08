@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.g01.mortgage.dao">
+
+	<sql id="columns">
+		id, name, contacts, start_time, manager, manager_contacts, subbranch, office
+	</sql>
+
+	<sql id="columns_as">
+		id as id , name as name , contacts as contacts , start_time as startTime , manager as manager , manager_contacts as managerContacts , subbranch as subbranch , office as office 
+	</sql>
+
+
+	<sql id="vals">
+		#{id}, #{name}, #{contacts}, #{startTime}, #{manager}, #{managerContacts}, #{subbranch}, #{office}
+	</sql>
+	<sql id="conds">
+		<if test="id != null">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="contacts != null and contacts != ''">
+			and contacts = #{contacts}
+		</if>
+		<if test="startTime != null and startTime != ''">
+			and start_time = #{startTime}
+		</if>
+		<if test="manager != null and manager != ''">
+			and manager = #{manager}
+		</if>
+		<if test="managerContacts != null and managerContacts != ''">
+			and manager_contacts = #{managerContacts}
+		</if>
+		<if test="subbranch != null and subbranch != ''">
+			and subbranch = #{subbranch}
+		</if>
+		<if test="office != null and office != ''">
+			and office = #{office}
+		</if>
+	</sql>
+
+	<insert id="saveMortgage" parameterType="com.g01.mortgage.entity.Mortgage" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into t_mortgage (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteMortgage">
+		delete from t_mortgage
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleMortgage">
+		delete from t_mortgage
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateMortgage">
+		update t_mortgage
+		<set>
+			id=#{id}, 
+			name=#{name}, 
+			contacts=#{contacts}, 
+			start_time=#{startTime}, 
+			manager=#{manager}, 
+			manager_contacts=#{managerContacts}, 
+			subbranch=#{subbranch}, 
+			office=#{office}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullMortgage">
+		update t_mortgage
+		<set>
+		<if test="id != null">
+			id=#{id}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="contacts != null and contacts != ''">
+			contacts=#{contacts}, 
+		</if>
+		<if test="startTime != null and startTime != ''">
+			start_time=#{startTime}, 
+		</if>
+		<if test="manager != null and manager != ''">
+			manager=#{manager}, 
+		</if>
+		<if test="managerContacts != null and managerContacts != ''">
+			manager_contacts=#{managerContacts}, 
+		</if>
+		<if test="subbranch != null and subbranch != ''">
+			subbranch=#{subbranch}, 
+		</if>
+		<if test="office != null and office != ''">
+			office=#{office}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleMortgage">
+		update t_mortgage
+		<set>
+			<if test="id != null">
+			id=#{id}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="contacts != null and contacts != ''">
+			contacts=#{contacts}, 
+			</if>
+			<if test="startTime != null and startTime != ''">
+			start_time=#{startTime}, 
+			</if>
+			<if test="manager != null and manager != ''">
+			manager=#{manager}, 
+			</if>
+			<if test="managerContacts != null and managerContacts != ''">
+			manager_contacts=#{managerContacts}, 
+			</if>
+			<if test="subbranch != null and subbranch != ''">
+			subbranch=#{subbranch}, 
+			</if>
+			<if test="office != null and office != ''">
+			office=#{office}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadMortgage" resultType="com.g01.mortgage.entity.MortgageVo">
+		select 
+		<include refid="columns_as"/>
+		from t_mortgage
+		where id=#{id} 
+	</select>
+	
+	<select id="selectMortgage" resultType="com.g01.mortgage.entity.MortgageVo">
+		select 
+		<include refid="columns_as"/>
+		from t_mortgage
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>
