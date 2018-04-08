@@ -15,6 +15,7 @@
 
 
     <http pattern="/userAction/**" security="none"/>
+    <http pattern="/weixin/**/*" security="none"/>
     <http pattern="/test/**" security="none"/>
 
     <http pattern="/token*" security="none"/>

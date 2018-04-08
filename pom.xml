@@ -28,7 +28,7 @@
                 <package.environment>online</package.environment>
             </properties>
             <!--<activation>-->
-                <!--<activeByDefault>true</activeByDefault>-->
+            <!--<activeByDefault>true</activeByDefault>-->
             <!--</activation>-->
         </profile>
     </profiles>
@@ -50,6 +50,11 @@
             <groupId>org.roof</groupId>
             <artifactId>roof-oauth2</artifactId>
             <version>${roof-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.roof</groupId>
+            <artifactId>roof-httpclient</artifactId>
+            <version>4.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

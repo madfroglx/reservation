@@ -40,11 +40,11 @@
     -->
     <import resource="classpath:spring-security.xml"/>
     <import resource="classpath:spring-security-bean.xml"/>
-    <import resource="classpath:spring-redis.xml"/>
-    <import resource="classpath:spring-cache-redis.xml"/>
+    <!--<import resource="classpath:spring-redis.xml"/>-->
+    <import resource="classpath:spring-cache-guava.xml"/>
 
 
     <import resource="spring-oauth2-service.xml"/>
-
+    <bean id="httpClientUtils" class="org.roof.httpclinet.HttpClientUtils"/>
 
 </beans>
