@@ -135,5 +135,7 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-core:4.3.9.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-core:3.3.1" level="project" />
+    <orderEntry type="library" name="Maven: com.aliyun:aliyun-java-sdk-dysmsapi:1.1.0" level="project" />
   </component>
 </module>
