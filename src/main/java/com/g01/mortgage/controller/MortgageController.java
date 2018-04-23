@@ -49,7 +49,8 @@ public class MortgageController {
             tempParams.put("subbranch", mortgage.getSubbranch());
             tempParams.put("manager", mortgage.getManager());
             Dictionary d = dictionaryService.load("S_DIC", "mobile");
-            SendSmsResponse smsResponse = SmsService.sendSms(d.getText(), "SMS_133155429", tempParams);
+            Dictionary d2 = dictionaryService.load("S_DIC", "tempId");
+            SendSmsResponse smsResponse = SmsService.sendSms(d.getText(), d2.getText(), tempParams);
             LOGGER.info(JSON.toJSONString(smsResponse));
             mortgageService.save(mortgage);
             return new Result("保存成功!");
