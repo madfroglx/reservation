@@ -38,8 +38,8 @@ public class SmsService {
     static final String domain = "dysmsapi.aliyuncs.com";
 
     // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-    static final String accessKeyId = "YZvGi7lVR1fxLOqc";
-    static final String accessKeySecret = "";
+    static final String accessKeyId = "LTAIMTwl14SHp0sR";
+    static final String accessKeySecret = "RUR1fuFL274bRBjX4KNqVhNjBgFOBv";
     private static boolean isTest = false;
 
     public static SendSmsResponse sendSms(String mobile, String tempId, Map<String, String> templateParams) {
@@ -119,11 +119,13 @@ public class SmsService {
 
     public static void main(String[] args) throws ClientException, InterruptedException {
         Map<String, String> tempParams = new HashMap<>();
-        tempParams.put("", "");
-        tempParams.put("", "");
-        tempParams.put("", "");
+        tempParams.put("bizName", "抵押");
+        tempParams.put("name", "张三");
+        tempParams.put("contacts", "13335713222");
+        tempParams.put("time", "2017-07-08");
+        tempParams.put("subbranch", "虎山");
         //发短信
-        SendSmsResponse response = sendSms("13335713202", "SMS_110090014", tempParams);
+        SendSmsResponse response = sendSms("13335713202", "SMS_132991563", tempParams);
         System.out.println("短信接口返回的数据----------------");
         System.out.println("Code=" + response.getCode());
         System.out.println("Message=" + response.getMessage());

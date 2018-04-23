@@ -1,14 +1,22 @@
 package com.g01.mortgage.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.g01.mortgage.entity.Mortgage;
 import com.g01.mortgage.entity.MortgageVo;
 import com.g01.mortgage.service.api.IMortgageService;
+import com.g01.reservation.service.impl.SmsService;
 import com.google.common.collect.Maps;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.roof.roof.dataaccess.api.Page;
 import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
+import org.roof.web.dictionary.entity.Dictionary;
+import org.roof.web.dictionary.service.api.IDictionaryService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,19 +24,33 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
 import java.util.Map;
 
 @Api(value = "mortgage", description = "抵押预约管理")
 @Controller
 @RequestMapping("test")
 public class MortgageController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MortgageController.class);
+
     private IMortgageService mortgageService;
+    private IDictionaryService dictionaryService;
 
     @RequestMapping(value = "mortgage/create", method = {RequestMethod.POST, RequestMethod.GET})
     public @ResponseBody
     Result create2(Mortgage mortgage, HttpServletResponse response) {
         response.setHeader("Access-Control-Allow-Origin", "*");
         if (mortgage != null) {
+            Map<String, String> tempParams = new HashMap<>();
+            tempParams.put("bizName", "抵押");
+            tempParams.put("name", mortgage.getName());
+            tempParams.put("contacts", mortgage.getContacts());
+            tempParams.put("time", mortgage.getStartTime());
+            tempParams.put("subbranch", mortgage.getSubbranch());
+            tempParams.put("manager", mortgage.getManager());
+            Dictionary d = dictionaryService.load("S_DIC", "mobile");
+            SendSmsResponse smsResponse = SmsService.sendSms(d.getText(), "SMS_133155429", tempParams);
+            LOGGER.info(JSON.toJSONString(smsResponse));
             mortgageService.save(mortgage);
             return new Result("保存成功!");
         } else {
@@ -102,5 +124,8 @@ public class MortgageController {
         this.mortgageService = mortgageService;
     }
 
-
+    @Autowired
+    public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
+        this.dictionaryService = dictionaryService;
+    }
 }
